@@ -1,0 +1,16 @@
+version: "3.3"
+
+services:
+  postgres:
+    image: postgres:10
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DATABASE}
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+
+    tmpfs:
+      - /var/lib/postgresql/data
+    ports:
+      - 127.0.0.1:${POSTGRES_PORT}:5432
